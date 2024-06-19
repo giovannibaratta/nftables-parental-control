@@ -15,6 +15,11 @@ type BlockRequest struct {
 
 func main() {
 
+	if os.Geteuid() != 0 {
+		log.Fatal("Application must be run as root")
+		return
+	}
+
 	port := os.Getenv("NFT_PC_PORT")
 	if port == "" {
 		port = "8080"
